@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Ionicons } from '@expo/vector-icons';
+import { View, ActivityIndicator } from 'react-native';
+import * as Font from 'expo-font';
 import HomeScreen from './screens/Home';
 import DoeRoupas from './screens/DoeRoupas';
 import TelaNotificacoes from './screens/TelaNotificacoes';
 import SplashScreen from './screens/SplashScreen';
-import OnboardingScreen from './screens/OnboardingScreen'; // Importando o OnboardingScreen
-import { Ionicons } from '@expo/vector-icons';
-import CadastroScreen from  './screens/Cadastro';
-import * as Font from 'expo-font';
-import { View, ActivityIndicator } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
-import TelaDoacao from './screens/TelaDoacao';
+import OnboardingScreen from './screens/OnboardingScreen';
+import CadastroScreen from './screens/Cadastro';
 import Login from './screens/Entrar';
 import DIY from './screens/DIY';
 import Doe from './screens/Doe';
 import ong from './screens/ONGs';
 import DoeRoupasDetail from './screens/DoeRoupasDetail';
+import video from './screens/DIY_video';
+import TelaDoacao from './screens/TelaDoacao';
+import green from './screens/Greencoins';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -34,9 +36,7 @@ const MainTabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        tabBarStyle:{marginHorizontal: '5%',
-          paddingBottom: 3,
-        },
+        tabBarStyle: { marginHorizontal: '5%', paddingBottom: 3 },
         tabBarIcon: ({ color, size }) => {
           let iconName;
           if (route.name === 'Início') {
@@ -56,35 +56,14 @@ const MainTabNavigator = () => {
         tabBarInactiveTintColor: 'gray',
       })}
     >
-      <Tab.Screen
-        name="Início"
-        component={HomeScreen}
-        options={{ headerShown: false }} // Desabilita o cabeçalho para a tela Início
-      />
-      <Tab.Screen
-        name="Doe Roupas"
-        component={DoeRoupasStack}
-        options={{ headerShown: false }} // Desabilita o cabeçalho para a tela Doe Roupas
-      />
-      <Tab.Screen
-        name="DIY"
-        component={DIY}
-        options={{ headerShown: false }} // Desabilita o cabeçalho para a tela DIY
-      />
-      <Tab.Screen
-        name="Prêmios"
-        component={HomeScreen}
-        options={{ headerShown: false }} // Desabilita o cabeçalho para a tela Prêmios
-      />
-      <Tab.Screen
-        name="Eu"
-        component={TelaNotificacoes}
-        options={{ headerShown: false }} // Desabilita o cabeçalho para a tela Eu
-      />
+      <Tab.Screen name="Início" component={HomeScreen} options={{ headerShown: false }} />
+      <Tab.Screen name="Doe Roupas" component={DoeRoupasStack} options={{ headerShown: false }} />
+      <Tab.Screen name="DIY" component={DIY} options={{ headerShown: false }} />
+      <Tab.Screen name="Prêmios" component={green} options={{ headerShown: false }} />
+      <Tab.Screen name="Eu" component={TelaNotificacoes} options={{ headerShown: false }} />
     </Tab.Navigator>
   );
 };
-
 
 const App = () => {
   const [isSplashVisible, setIsSplashVisible] = useState(true);
@@ -129,8 +108,8 @@ const App = () => {
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="TelaDoacao" component={TelaDoacao} />
             <Stack.Screen name="ong" component={ong} />
-            <Stack.Screen name="DoeRoupasDetail" component={DoeRoupasDetail} options={{ title: 'Detalhes da ONG' }} />
-
+            <Stack.Screen name="DoeRoupasDetail" component={DoeRoupasDetail} />
+            <Stack.Screen name="video" component={video} />
           </>
         )}
       </Stack.Navigator>
@@ -139,4 +118,3 @@ const App = () => {
 };
 
 export default App;
-

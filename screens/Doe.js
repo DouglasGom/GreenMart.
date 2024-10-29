@@ -10,15 +10,12 @@ const Header = ({ navigation }) => {
 
     return (
         <View style={styles.header}>
-            <Image
-                source={logo}
-                style={styles.logo}
-            />
+            <Image source={logo} style={styles.logo} />
             <TextInput
                 style={styles.searchInput}
                 placeholder="Buscar..."
                 value={searchText}
-                onChangeText={(text) => setSearchText(text)}
+                onChangeText={setSearchText}
             />
             <TouchableOpacity onPress={() => navigation.navigate('Sacola')}>
                 <Ionicons name="bag-outline" size={28} color="black" />
@@ -31,22 +28,14 @@ export default function UpcyclingScreen({ navigation }) {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [donationAmount, setDonationAmount] = useState('');
 
-    const handleCardPress = (screen) => {
-        navigation.navigate(screen);
-    };
-
-    const openDonationModal = () => {
-        setIsModalVisible(true);
-    };
-
-    const closeDonationModal = () => {
-        setIsModalVisible(false);
-    };
+    const handleCardPress = (screen) => navigation.navigate(screen);
+    const openDonationModal = () => setIsModalVisible(true);
+    const closeDonationModal = () => setIsModalVisible(false);
 
     const handleDonation = () => {
         if (donationAmount) {
-            setIsModalVisible(false);
-            navigation.navigate('TelaDoacao', { valorDoacao: donationAmount }); // Passa o valor da doação para TelaDoacao
+            closeDonationModal();
+            navigation.navigate('TelaDoacao', { valorDoacao: donationAmount });
             setDonationAmount('');
         } else {
             alert("Por favor, insira um valor para doar.");
@@ -60,15 +49,11 @@ export default function UpcyclingScreen({ navigation }) {
             <ScrollView style={styles.cardsContainer}>
                 <TouchableOpacity style={styles.card} onPress={() => handleCardPress('DetailsScreen1')}>
                     <Image source={roupas} style={styles.cardImage} />
-                    <View style={styles.cardContent}>
-                        <Text style={styles.cardTitle}>DOAÇÃO DE ROUPAS</Text>
-                    </View>
+                    <Text style={styles.cardTitle}>DOAÇÃO DE ROUPAS</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.card} onPress={openDonationModal}>
                     <Image source={dinheiro} style={styles.cardImage} />
-                    <View style={styles.cardContent}>
-                        <Text style={styles.cardTitle}>DOAÇÃO DE DINHEIRO</Text>
-                    </View>
+                    <Text style={styles.cardTitle}>DOAÇÃO DE DINHEIRO</Text>
                 </TouchableOpacity>
             </ScrollView>
             <Modal
@@ -85,7 +70,7 @@ export default function UpcyclingScreen({ navigation }) {
                             placeholder="R$0,00"
                             keyboardType="numeric"
                             value={donationAmount}
-                            onChangeText={(value) => setDonationAmount(value)}
+                            onChangeText={setDonationAmount}
                         />
                         <TouchableOpacity style={styles.confirmButton} onPress={handleDonation}>
                             <Text style={styles.confirmButtonText}>➜</Text>
@@ -158,9 +143,6 @@ const styles = StyleSheet.create({
     cardImage: {
         height: 200,
         width: '100%',
-    },
-    cardContent: {
-        padding: 10,
     },
     cardTitle: {
         fontWeight: 'bold',

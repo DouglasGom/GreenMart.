@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { Checkbox } from 'expo-checkbox';
 import logo from '../assets/Logo-GreenMart.png';
-import HomeScreen from './Home';
 
 export default function RegisterScreen({ navigation }) {
     const [isCheckedOffers, setCheckedOffers] = React.useState(false);
@@ -10,21 +9,12 @@ export default function RegisterScreen({ navigation }) {
 
     return (
         <View style={styles.container}>
-            {/* Logo */}
-            <Image
-                source={logo}
-                style={styles.logo}
-            />
-            {/* Título */}
+            <Image source={logo} style={styles.logo} />
             <Text style={styles.title}>CADASTRE-SE</Text>
-
-            {/* Campos de Texto */}
             <TextInput placeholder="Nome" style={styles.input} />
             <TextInput placeholder="E-mail" style={styles.input} keyboardType="email-address" />
             <TextInput placeholder="Senha" style={styles.input} secureTextEntry />
             <TextInput placeholder="Confirmar Senha" style={styles.input} secureTextEntry />
-
-            {/* Checkboxes e Termos */}
             <View style={styles.checkboxContainer1}>
                 <Checkbox value={isCheckedOffers} onValueChange={setCheckedOffers} color={isCheckedOffers ? '#0CD028' : undefined} />
                 <Text style={styles.checkboxLabel}>Aceito receber ofertas e novidades no meu E-mail</Text>
@@ -35,29 +25,20 @@ export default function RegisterScreen({ navigation }) {
                     Concordo com os <Text style={styles.link}>Termos de Serviço</Text> e <Text style={styles.link}>Política de Privacidade</Text>
                 </Text>
             </View>
-
-            {/* Botão Cadastrar */}
             <TouchableOpacity style={styles.registerButton}>
                 <Text style={styles.registerButtonText}>CADASTRAR</Text>
             </TouchableOpacity>
-
-            {/* Linha divisória */}
             <View style={styles.dividerContainer}>
                 <View style={styles.divider} />
                 <Text style={styles.orText}>ou</Text>
                 <View style={styles.divider} />
             </View>
-
-            {/* Já tem uma conta? */}
             <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('Login')}>
                 <Text style={styles.loginButtonText}>ENTRAR</Text>
             </TouchableOpacity>
-
-            {/* Botão Continuar como Convidado */}
             <TouchableOpacity style={styles.guestButton} onPress={() => navigation.navigate('Main')}>
                 <Text style={styles.guestButtonText}>CONTINUAR COMO CONVIDADO</Text>
             </TouchableOpacity>
-
         </View>
     );
 }
@@ -91,24 +72,23 @@ const styles = StyleSheet.create({
     },
     checkboxContainer1: {
         flexDirection: 'row',
-        alignItems: 'center', // Garante que a checkbox e o texto estejam alinhados verticalmente
+        alignItems: 'center',
         marginBottom: 10,
-        marginRight: 65
+        marginRight: 65,
     },
     checkboxContainer: {
         flexDirection: 'row',
-        alignItems: 'center', // Garante que a checkbox e o texto estejam alinhados verticalmente
+        alignItems: 'center',
         marginBottom: 10,
     },
     checkboxLabel: {
         fontSize: 12,
         color: '#666',
-        marginLeft: 10, // Espaço entre a checkbox e o texto
+        marginLeft: 10,
     },
     link: {
-        color: '#007BFF', // Azul para links
+        color: '#007BFF',
     },
-
     registerButton: {
         width: '40%',
         height: 50,
@@ -142,7 +122,7 @@ const styles = StyleSheet.create({
     loginButton: {
         width: '40%',
         height: 50,
-        backgroundColor: '#0CD028', // Verde para o botão "Entrar"
+        backgroundColor: '#0CD028',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 25,

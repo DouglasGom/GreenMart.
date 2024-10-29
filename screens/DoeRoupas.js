@@ -5,9 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import MapView, { Marker } from 'react-native-maps';
 import { useFonts } from 'expo-font';
 import Greencoins from '../assets/Greencoins.png';
-import TelaDoacao from '../screens/TelaDoacao.js';
 import logo from '../assets/Logo-GreenMart.png';
-import ong1 from '../assets/ong1.jpg'
 
 const DoeRoupasScreen = () => {
     const navigation = useNavigation();
@@ -17,27 +15,23 @@ const DoeRoupasScreen = () => {
         'Poppins-Bold': require('../assets/fonts/Poppins/Poppins-Bold.ttf'),
     });
 
-    if (!fontsLoaded) {
-        return null;
-    }
+    if (!fontsLoaded) return null;
 
     return (
         <ScrollView style={styles.container}>
-            {/* Header com logo, barra de busca e ícone da sacola */}
             <View style={styles.header}>
                 <Image source={logo} style={styles.logo} />
                 <TextInput
                     style={styles.searchInput}
                     placeholder="Buscar..."
                     value={searchText}
-                    onChangeText={(text) => setSearchText(text)}
+                    onChangeText={setSearchText}
                 />
                 <TouchableOpacity onPress={() => navigation.navigate('Sacola')}>
                     <Ionicons name="bag-outline" size={28} color="black" />
                 </TouchableOpacity>
             </View>
 
-            {/* Header com Green Coins e botão */}
             <View style={styles.coinsHeader}>
                 <Text style={styles.greenCoinsText}>MEUS GREEN COINS:</Text>
                 <View style={styles.greenCoinsContainer}>
@@ -52,14 +46,12 @@ const DoeRoupasScreen = () => {
             </View>
 
             <Text style={styles.causeTitle}>DOE PARA A CAUSA</Text>
-            {/* Seção "Doe para a Causa" */}
             <View style={styles.causeSection}>
                 <Text style={styles.causeText}>
                     Das 59 mil toneladas de roupas importadas todos os anos, grande parte (por volta de 40 mil toneladas) não é vendida - acaba no lixo.
                 </Text>
             </View>
 
-            {/* Seção "Pontos de Coleta" */}
             <View style={styles.collectionPointsSection}>
                 <Text style={styles.collectionPointsTitle}>PONTOS DE COLETA</Text>
                 <MapView
@@ -83,19 +75,13 @@ const DoeRoupasScreen = () => {
                 <TouchableOpacity style={styles.donateButton} onPress={() => navigation.navigate('ong')}>
                     <Text style={styles.donateButtonText}>DOAR</Text>
                 </TouchableOpacity>
-
             </View>
-
-            
         </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-    },
+    container: { flex: 1, backgroundColor: '#fff' },
     header: {
         marginTop: 20,
         flexDirection: 'row',
@@ -103,11 +89,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 15,
     },
-    logo: {
-        width: 70,
-        height: 70,
-        resizeMode: 'contain',
-    },
+    logo: { width: 70, height: 70, resizeMode: 'contain' },
     searchInput: {
         flex: 1,
         height: 40,
@@ -128,43 +110,14 @@ const styles = StyleSheet.create({
         elevation: 5,
         backgroundColor: '#fff',
     },
-    greenCoinsImage: {
-        width: 25,
-        height: 25,
-        marginRight: 3,
-        marginLeft: -20,
-    },
-    greenCoinsContent: {
-        alignItems: 'center',
-    },
-    greenCoinsText: {
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
-    greenCoinsContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    coinValue: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        marginTop: -2,
-        marginRight: 20,
-    },
-    exchangeButton: {
-        backgroundColor: '#A6F2A4',
-        paddingVertical: 5,
-        paddingHorizontal: 5,
-        borderRadius: 30,
-    },
-    exchangeButtonText: {
-        color: '#000',
-        fontWeight: 'bold',
-    },
-    causeSection: {
-        padding: 15,
-        backgroundColor: 'rgba(166, 242, 164, 0.73)',
-    },
+    greenCoinsImage: { width: 25, height: 25, marginRight: 3, marginLeft: -20 },
+    greenCoinsContent: { alignItems: 'center' },
+    greenCoinsText: { fontSize: 16, fontWeight: 'bold' },
+    greenCoinsContainer: { flexDirection: 'row', alignItems: 'center' },
+    coinValue: { fontSize: 16, fontWeight: 'bold', marginTop: -2, marginRight: 20 },
+    exchangeButton: { backgroundColor: '#A6F2A4', paddingVertical: 5, paddingHorizontal: 5, borderRadius: 30 },
+    exchangeButtonText: { color: '#000', fontWeight: 'bold' },
+    causeSection: { padding: 15, backgroundColor: 'rgba(166, 242, 164, 0.73)' },
     causeTitle: {
         fontSize: 20,
         fontWeight: 'bold',
@@ -173,16 +126,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontFamily: 'Poppins-Bold',
     },
-    causeText: {
-        fontSize: 14,
-        color: '#333',
-        fontFamily: 'Poppins-Regular',
-        textAlign: 'justify',
-    },
-    collectionPointsSection: {
-        padding: 15,
-        marginHorizontal: 15,
-    },
+    causeText: { fontSize: 14, color: '#333', fontFamily: 'Poppins-Regular', textAlign: 'justify' },
+    collectionPointsSection: { padding: 15, marginHorizontal: 15 },
     collectionPointsTitle: {
         fontSize: 20,
         fontWeight: 'bold',
@@ -190,51 +135,10 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontFamily: 'Poppins-Bold',
     },
-    map: {
-        width: '100%',
-        height: 200,
-        borderRadius: 8,
-        marginBottom: 10,
-    },
-    collectionPointsText: {
-        fontSize: 14,
-        color: '#333',
-        marginBottom: 15,
-        fontFamily: 'Poppins-Regular',
-        textAlign: 'justify',
-    },
-    donateButton: {
-        backgroundColor: '#FFA6E1',
-        paddingVertical: 10,
-        paddingHorizontal: 30,
-        borderRadius: 8,
-        alignSelf: 'center',
-    },
-    donateButtonText: {
-        color: '#000',
-        fontWeight: 'bold',
-    },
-    partnersSection: {
-        padding: 15,
-        marginHorizontal: 15,
-    },
-    partnersTitle: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        marginBottom: 10,
-        textAlign: 'center',
-        fontFamily: 'Poppins-Bold',
-    },
-    ongImage: {
-        width: '100%',
-        height: 150,
-        borderRadius: 8,
-    },
-
-    ongButton: {
-        alignItems: 'center',
-        marginBottom: 20,
-    }
+    map: { width: '100%', height: 200, borderRadius: 8, marginBottom: 10 },
+    collectionPointsText: { fontSize: 14, color: '#333', marginBottom: 15, fontFamily: 'Poppins-Regular', textAlign: 'justify' },
+    donateButton: { backgroundColor: '#FFA6E1', paddingVertical: 10, paddingHorizontal: 30, borderRadius: 8, alignSelf: 'center' },
+    donateButtonText: { color: '#000', fontWeight: 'bold' },
 });
 
 export default DoeRoupasScreen;
